@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Read Corner Grade 2</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff4c2, #dff5ff);
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 38px;
+      color: #ff7b54;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+    .book {
+      font-size: 70px;
+    }
+
+    h2 {
+      color: #4b8bbe;
+    }
+
+    .story {
+      font-size: 22px;
+      line-height: 1.8;
+      text-align: left;
+      background: #fffbea;
+      padding: 20px;
+      border-radius: 18px;
+    }
+
+    .important {
+      background: #e7f7ff;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 20px;
+    }
+
+    button {
+      background: #ff9f43;
+      border: none;
+      color: white;
+      padding: 14px 25px;
+      border-radius: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 8px;
+    }
+
+    button:hover {
+      background: #ff7b54;
+    }
+
+    .question {
+      text-align: left;
+      font-size: 19px;
+      margin: 20px 0;
+      padding: 15px;
+      background: #f7f7f7;
+      border-radius: 15px;
+    }
+
+    .question label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    #result {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .stars {
+      font-size: 35px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>📚 READ CORNER</h1>
+  <div class="subtitle">🌈 Grade 2 – Mari Membaca!</div>
+
+  <div class="card">
+    <div class="book">📖</div>
+
+    <h2>✨ Bola Baru Rina ✨</h2>
+
+    <div class="story">
+      Rina mendapat bola baru.<br><br>
+
+      “Wah, bolanya bagus sekali!” seru Rina.<br><br>
+
+      Rina bermain bersama teman-temannya.<br><br>
+
+      “Hati-hati, jangan sampai jatuh!” kata Ibu.<br><br>
+
+      Rina menangkap bola itu.<br><br>
+
+      “Yeay, aku berhasil!” katanya dengan gembira.
+    </div>
+  </div>
+
+  <div class="card">
+
+    <h2>❗ Mengenal Tanda Seru</h2>
+
+    <div class="important">
+      Tanda seru <b>(!)</b> digunakan untuk menunjukkan
+      rasa kagum, gembira, kaget, atau perintah.
+      <br><br>
+
+      Contoh:<br>
+      <b>“Wah, bagus sekali!”</b> 😍<br>
+      <b>“Hati-hati!”</b> ⚠️<br>
+      <b>“Yeay, aku berhasil!”</b> 🎉
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>🎯 KUIS TANDA SERU</h2>
+
+    <form id="quiz">
+
+      <div class="question">
+        <b>1. Kalimat manakah yang menggunakan tanda seru?</b>
+
+        <label>
+          <input type="radio" name="q1" value="a">
+          Rina membaca buku.
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="b">
+          Wah, bagus sekali!
+        </label>
+      </div>
+
+
+      <div class="question">
+        <b>2. Apa tanda baca yang digunakan pada akhir kalimat “Hati-hati!”?</b>
+
+        <label>
+          <input type="radio" name="q2" value="a">
+          Tanda titik (.)
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="b">
+          Tanda seru (!)
+        </label>
+      </div>
+
+
+      <div class="question">
+        <b>3. “Yeay, aku menang!” menunjukkan perasaan...</b>
+
+        <label>
+          <input type="radio" name="q3" value="a">
+          Gembira
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="b">
+          Sedih
+        </label>
+      </div>
+
+
+      <div class="question">
+        <b>4. Pilih kalimat yang tepat!</b>
+
+        <label>
+          <input type="radio" name="q4" value="a">
+          Jangan berlari!
+        </label>
+
+        <label>
+          <input type="radio" name="q4" value="b">
+          Jangan berlari.
+        </label>
+      </div>
+
+
+      <div class="question">
+        <b>5. Tanda seru dilambangkan dengan...</b>
+
+        <label>
+          <input type="radio" name="q5" value="a">
+          ?
+        </label>
+
+        <label>
+          <input type="radio" name="q5" value="b">
+          !
+        </label>
+      </div>
+
+      <button type="button" onclick="checkQuiz()">
+        ⭐ Lihat Nilai
+      </button>
+
+    </form>
+
+    <div id="result"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function checkQuiz() {
+
+  let score = 0;
+
+  const answers = {
+    q1: "b",
+    q2: "b",
+    q3: "a",
+    q4: "a",
+    q5: "b"
+  };
+
+  for (let question in answers) {
+
+    let selected = document.querySelector(
+      'input[name="' + question + '"]:checked'
+    );
+
+    if (selected && selected.value === answers[question]) {
+      score++;
+    }
+
+  }
+
+  let message = "";
+
+  if (score === 5) {
+    message = "🎉 SEMPURNA! Kamu hebat sekali! ⭐⭐⭐⭐⭐";
+  } 
+  else if (score >= 3) {
+    message = "😊 Bagus! Terus berlatih ya! ⭐⭐⭐";
+  } 
+  else {
+    message = "💪 Tidak apa-apa. Ayo baca lagi dan coba kembali!";
+  }
+
+  document.getElementById("result").innerHTML =
+    "Nilaimu: " + score + " / 5<br><br>" + message;
+}
+
+</script>
+
+</body>
+</html>
