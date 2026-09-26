@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kuis Membaca Grafik - Kelas 2</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff4d6, #e8f7ff);
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 30px;
+    }
+
+    .header p {
+      margin-bottom: 0;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    }
+
+    .card h2 {
+      color: #e85d75;
+      text-align: center;
+    }
+
+    .note {
+      background: #fff8d9;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* GRAFIK */
+    .chart {
+      margin-top: 25px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin: 18px 0;
+      gap: 10px;
+    }
+
+    .subject {
+      width: 150px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .bar-area {
+      flex: 1;
+      background: #eeeeee;
+      border-radius: 20px;
+      height: 32px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: white;
+      font-weight: bold;
+      transition: width 1s ease;
+    }
+
+    .math {
+      background: #ff7675;
+      width: 83.33%;
+    }
+
+    .indonesia {
+      background: #74b9ff;
+      width: 66.67%;
+    }
+
+    .ipas {
+      background: #55efc4;
+      width: 58.33%;
+    }
+
+    .english {
+      background: #a29bfe;
+      width: 50%;
+    }
+
+    .pancasila {
+      background: #fdcb6e;
+      width: 41.67%;
+    }
+
+    /* SOAL */
+    .question {
+      background: #f8fbff;
+      border: 2px solid #e2ecf7;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .question h3 {
+      margin-top: 0;
+      color: #444;
+      font-size: 17px;
+    }
+
+    label {
+      display: block;
+      background: white;
+      padding: 11px;
+      margin: 8px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      transition: 0.2s;
+    }
+
+    label:hover {
+      background: #fff3f5;
+      border-color: #ff9a9e;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      padding: 16px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #ff7675, #e84393);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    #result {
+      display: none;
+      text-align: center;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 20px;
+      background: #eaffea;
+      border: 2px solid #8bd48b;
+    }
+
+    #score {
+      font-size: 38px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .retry-btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 12px;
+      background: #0984e3;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .subject {
+        width: 115px;
+        font-size: 13px;
+      }
+
+      .bar-area {
+        height: 28px;
+      }
+
+      .container {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- JUDUL -->
+  <div class="header">
+    <h1>📊 Kuis Membaca Grafik</h1>
+    <p>Kegemaran Siswa Kelas 2</p>
+  </div>
+
+  <!-- GRAFIK -->
+  <div class="card">
+
+    <h2>📚 Mata Pelajaran yang Disukai</h2>
+
+    <div class="note">
+      👩‍🏫 <b>Data:</b> terdapat 12 siswa.
+      Seorang siswa boleh menyukai lebih dari satu mata pelajaran.
+    </div>
+
+    <div class="chart">
+
+      <div class="bar-row">
+        <div class="subject">Matematika</div>
+        <div class="bar-area">
+          <div class="bar math">10 siswa</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="subject">B. Indonesia</div>
+        <div class="bar-area">
+          <div class="bar indonesia">8 siswa</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="subject">IPAS</div>
+        <div class="bar-area">
+          <div class="bar ipas">7 siswa</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="subject">B. Inggris</div>
+        <div class="bar-area">
+          <div class="bar english">6 siswa</div>
+        </div>
+      </div>
+
+      <div class="bar-row">
+        <div class="subject">P. Pancasila</div>
+        <div class="bar-area">
+          <div class="bar pancasila">5 siswa</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- KUIS -->
+  <div class="card">
+
+    <h2>✏️ Ayo Jawab Pertanyaan!</h2>
+
+    <form id="quizForm">
+
+      <!-- SOAL 1 -->
+      <div class="question">
+        <h3>1. Mata pelajaran apa yang paling banyak disukai siswa?</h3>
+
+        <label>
+          <input type="radio" name="q1" value="a">
+          A. IPAS
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="b">
+          B. Matematika
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="c">
+          C. Bahasa Inggris
+        </label>
+
+        <label>
+          <input type="radio" name="q1" value="d">
+          D. Pendidikan Pancasila
+        </label>
+      </div>
+
+
+      <!-- SOAL 2 -->
+      <div class="question">
+        <h3>2. Berapa siswa yang menyukai Bahasa Indonesia?</h3>
+
+        <label>
+          <input type="radio" name="q2" value="a">
+          A. 6 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="b">
+          B. 8 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="c">
+          C. 10 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q2" value="d">
+          D. 7 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 3 -->
+      <div class="question">
+        <h3>3. Mata pelajaran apa yang paling sedikit disukai?</h3>
+
+        <label>
+          <input type="radio" name="q3" value="a">
+          A. Pendidikan Pancasila
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="b">
+          B. IPAS
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="c">
+          C. Matematika
+        </label>
+
+        <label>
+          <input type="radio" name="q3" value="d">
+          D. Bahasa Indonesia
+        </label>
+      </div>
+
+
+      <!-- SOAL 4 -->
+      <div class="question">
+        <h3>4. Berapa selisih siswa yang menyukai Matematika dan Bahasa Indonesia?</h3>
+
+        <label>
+          <input type="radio" name="q4" value="a">
+          A. 2 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q4" value="b">
+          B. 3 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q4" value="c">
+          C. 4 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q4" value="d">
+          D. 5 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 5 -->
+      <div class="question">
+        <h3>5. Berapa selisih siswa yang menyukai IPAS dan Bahasa Inggris?</h3>
+
+        <label>
+          <input type="radio" name="q5" value="a">
+          A. 1 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q5" value="b">
+          B. 2 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q5" value="c">
+          C. 3 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q5" value="d">
+          D. 4 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 6 -->
+      <div class="question">
+        <h3>6. Ada 12 siswa. Jika 10 siswa menyukai Matematika, berapa siswa yang tidak memilih Matematika?</h3>
+
+        <label>
+          <input type="radio" name="q6" value="a">
+          A. 1 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q6" value="b">
+          B. 2 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q6" value="c">
+          C. 3 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q6" value="d">
+          D. 4 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 7 -->
+      <div class="question">
+        <h3>7. Urutan mata pelajaran dari yang paling banyak disukai adalah ...</h3>
+
+        <label>
+          <input type="radio" name="q7" value="a">
+          A. Matematika → Bahasa Indonesia → IPAS → Bahasa Inggris → Pancasila
+        </label>
+
+        <label>
+          <input type="radio" name="q7" value="b">
+          B. Pancasila → Bahasa Inggris → IPAS → Bahasa Indonesia → Matematika
+        </label>
+
+        <label>
+          <input type="radio" name="q7" value="c">
+          C. Bahasa Indonesia → Matematika → IPAS → Pancasila → Bahasa Inggris
+        </label>
+
+        <label>
+          <input type="radio" name="q7" value="d">
+          D. IPAS → Matematika → Bahasa Inggris → Bahasa Indonesia → Pancasila
+        </label>
+      </div>
+
+
+      <!-- SOAL 8 -->
+      <div class="question">
+        <h3>8. Berapa jumlah siswa yang menyukai IPAS dan Bahasa Inggris jika digabungkan?</h3>
+
+        <label>
+          <input type="radio" name="q8" value="a">
+          A. 11 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q8" value="b">
+          B. 12 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q8" value="c">
+          C. 13 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q8" value="d">
+          D. 14 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 9 -->
+      <div class="question">
+        <h3>9. Berapa selisih siswa yang menyukai Matematika dan Pendidikan Pancasila?</h3>
+
+        <label>
+          <input type="radio" name="q9" value="a">
+          A. 3 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q9" value="b">
+          B. 4 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q9" value="c">
+          C. 5 siswa
+        </label>
+
+        <label>
+          <input type="radio" name="q9" value="d">
+          D. 6 siswa
+        </label>
+      </div>
+
+
+      <!-- SOAL 10 -->
+      <div class="question">
+        <h3>10. Pernyataan manakah yang benar berdasarkan grafik?</h3>
+
+        <label>
+          <input type="radio" name="q10" value="a">
+          A. Matematika paling banyak disukai.
+        </label>
+
+        <label>
+          <input type="radio" name="q10" value="b">
+          B. Pancasila paling banyak disukai.
+        </label>
+
+        <label>
+          <input type="radio" name="q10" value="c">
+          C. Bahasa Inggris disukai 10 siswa.
+        </label>
+
+        <label>
+          <input type="radio" name="q10" value="d">
+          D. IPAS disukai 5 siswa.
+        </label>
+      </div>
+
+
+      <button type="button" class="submit-btn" onclick="checkQuiz()">
+        ⭐ Lihat Nilai Saya
+      </button>
+
+    </form>
+
+
+    <!-- HASIL -->
+    <div id="result">
+
+      <h2>🎉 Hasil Kuis</h2>
+
+      <div id="score"></div>
+
+      <p id="message"></p>
+
+      <button class="retry-btn" onclick="retryQuiz()">
+        🔄 Ulangi Kuis
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    💕 Read Corner Grade 2 • Belajar sambil bermain
+  </div>
+
+</div>
+
+
+<script>
+
+function checkQuiz() {
+
+  const answers = {
+    q1: "b",
+    q2: "b",
+    q3: "a",
+    q4: "a",
+    q5: "a",
+    q6: "b",
+    q7: "a",
+    q8: "c",
+    q9: "c",
+    q10: "a"
+  };
+
+  let score = 0;
+  let unanswered = 0;
+
+  for (let question in answers) {
+
+    const selected = document.querySelector(
+      'input[name="' + question + '"]:checked'
+    );
+
+    if (!selected) {
+      unanswered++;
+    } else if (selected.value === answers[question]) {
+      score++;
+    }
+  }
+
+  if (unanswered > 0) {
+
+    alert(
+      "😊 Masih ada " +
+      unanswered +
+      " soal yang belum dijawab. Yuk lengkapi dulu!"
+    );
+
+    return;
+  }
+
+  let finalScore = score * 10;
+
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("score").innerHTML =
+    finalScore + " / 100";
+
+  let message = "";
+
+  if (score === 10) {
+
+    message =
+      "🎉 Luar biasa! Kamu sangat pandai membaca grafik! ⭐⭐⭐⭐⭐";
+
+  } else if (score >= 7) {
+
+    message =
+      "😊 Bagus sekali! Terus berlatih membaca grafik! ⭐⭐⭐⭐";
+
+  } else if (score >= 4) {
+
+    message =
+      "💪 Sudah bagus! Ayo belajar membaca grafik lagi! ⭐⭐⭐";
+
+  } else {
+
+    message =
+      "🌱 Tidak apa-apa. Yuk pelajari grafik lagi dan coba kembali! ❤️";
+  }
+
+  document.getElementById("message").innerHTML = message;
+
+  document.getElementById("result").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+
+function retryQuiz() {
+
+  document.getElementById("quizForm").reset();
+
+  document.getElementById("result").style.display = "none";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>
